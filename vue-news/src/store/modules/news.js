@@ -17,7 +17,7 @@ export default {
         }
     },
     actions: {
-        FETCH_NEWS({ commit }) {
+        FETCH_NEWS({commit}) {
             fetchNewsList()
                 .then((response) => commit('setNewsList', response.data))
                 .catch((error) => console.log(error))

@@ -17,7 +17,7 @@ export default {
         }
     },
     actions: {
-        FETCH_ASKS({ commit }) {
+        FETCH_ASKS({commit}) {
             fetchAskList()
                 .then((response) => commit('setAskList', response.data))
                 .catch((error) => console.log(error))

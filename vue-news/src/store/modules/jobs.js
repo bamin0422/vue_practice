@@ -1,4 +1,4 @@
-import {fetchJobsList, fetchNewsList} from "@/api";
+import {fetchJobsList} from "@/api";
 
 const jobState = {
     jobs: []
@@ -17,9 +17,12 @@ export default {
         }
     },
     actions: {
-        FETCH_JOBS({ commit }) {
+        FETCH_JOBS({commit}) {
             fetchJobsList()
-                .then((response) => commit('setJobList', response.data))
+                .then((response) => {
+                    commit('setJobList', response.data)
+                    console.log(response.data);
+                })
                 .catch((error) => console.log(error))
         }
     }
