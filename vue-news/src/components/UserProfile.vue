@@ -4,26 +4,19 @@
       <i class="fa-solid fa-user"></i>
     </div>
     <div class="user-description">
-      <div>{{ userInfo.id }}</div>
-      <div class="time">{{ userInfo.created }}</div>
+      <slot name="username"><div>username : {{ info.id }}</div></slot>
+      <slot name="time"><div class="time">time : {{ info.created }}</div></slot>
+      <slot name="karma"></slot>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import store from "@/store";
 
 export default {
-  computed: {
-    ...mapGetters({
-      userInfo: `getUserInfo`
-    })
+  props: {
+    info: Object
   },
-  created() {
-    const userName = this.$route.params.id;
-    store.dispatch(`FETCH_USER_INFO`, userName);
-  }
 }
 </script>
 
@@ -44,6 +37,6 @@ export default {
 }
 
 .time {
-  font-size: 24px;
+  font-size: 4px;
 }
 </style>

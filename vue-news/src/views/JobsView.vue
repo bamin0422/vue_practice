@@ -9,6 +9,7 @@ import store from "@/store";
 import {mapGetters} from "vuex";
 import ListItem from "@/components/ListItem.vue";
 
+
 export default {
   components: {
     ListItem

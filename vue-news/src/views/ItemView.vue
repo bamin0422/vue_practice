@@ -1,19 +1,9 @@
 <template xmlns="http://www.w3.org/1999/html">
   <div>
     <section>
-      <div class="user-container">
-        <div>
-          <i class="fa-solid fa-user"></i>
-        </div>
-        <div class="user-description">
-          <router-link :to="`/user/${fetchedItem.user}`">
-            {{ fetchedItem.user }}
-          </router-link>
-          <div class="time">
-            {{ fetchedItem.time_ago }}
-          </div>
-        </div>
-      </div>
+      <user-profile :info="fetchedUser">
+        <template v-slot:username><router-link v-bind:to="`/user/${fetchedUser.id}`">{{ fetchedUser.id }}</router-link></template>
+      </user-profile>
       <div>
         <h2>{{ fetchedItem.title }}</h2>
       </div>
@@ -27,16 +17,28 @@
 <script>
 import store from "@/store";
 import {mapGetters} from "vuex";
+import UserProfile from "@/components/UserProfile.vue";
 
 export default {
+  components: {UserProfile},
   computed: {
     ...mapGetters({
-      fetchedItem: `getPostInfo`
-    })
+      fetchedItem: `getPostInfo`,
+      fetchedUser: `getUserInfo`
+    }),
   },
   created() {
-    const postId = this.$route.params.id;
-    store.dispatch(`FETCH_POST_INFO`, postId);
+    this.fetchItemAndUserData;
+  },
+  beforeUpdate() {
+    this.fetchItemAndUserData;
+  },
+  actions: {
+    fetchItemAndUserData() {
+      const postId = this.$route.params.id;
+      store.dispatch(`FETCH_POST_INFO`, postId);
+      store.dispatch(`FETCH_USER_INFO`, this.fetchedItem.user);
+    }
   }
 }
 </script>

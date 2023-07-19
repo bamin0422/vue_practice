@@ -1,18 +1,36 @@
 <template>
   <div id="app">
     <tool-bar></tool-bar>
-    <transition name="fade">
+    <transition-group name="fade">
       <router-view></router-view>
-    </transition>
+      <spinner :loading="showSpinner"></spinner>
+    </transition-group>
   </div>
 </template>
 
 <script>
 import ToolBar from "@/components/ToolBar.vue";
+import Spinner from "@/components/Spinner.vue";
 
 export default {
+  data() {
+    return {
+      showSpinner: false
+    }
+  },
   components: {
+    Spinner,
     ToolBar,
+  },
+  created() {
+  },
+  methods: {
+    startSpinner() {
+      this.showSpinner = true;
+    },
+    endSpinner() {
+      this.showSpinner = false;
+    }
   }
 }
 </script>

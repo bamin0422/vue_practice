@@ -11,6 +11,9 @@ export default {
   components: {
     ListItem,
   },
+  created() {
+
+  }
 }
 </script>
 
