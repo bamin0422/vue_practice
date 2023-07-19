@@ -36,7 +36,6 @@ export default {
   },
   created() {
     const postId = this.$route.params.id;
-    console.log(postId);
     store.dispatch(`FETCH_POST_INFO`, postId);
   }
 }
